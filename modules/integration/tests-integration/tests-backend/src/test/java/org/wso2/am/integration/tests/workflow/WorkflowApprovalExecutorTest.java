@@ -144,6 +144,8 @@ public class WorkflowApprovalExecutorTest extends APIManagerLifecycleBaseTest {
         apiRequest.setProvider(USER_SMITH);
         HttpResponse apiResponse = restAPIPublisher.addAPI(apiRequest);
         apiId = apiResponse.getData();
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
         //request to publish the API
         HttpResponse lifeCycleChangeResponse = restAPIPublisher
                 .changeAPILifeCycleStatus(apiId, APILifeCycleAction.PUBLISH.getAction(), null);
@@ -514,8 +516,10 @@ public class WorkflowApprovalExecutorTest extends APIManagerLifecycleBaseTest {
         apiRequest.setTier(APIMIntegrationConstants.API_TIER.UNLIMITED);
         apiRequest.setProvider(USER_SMITH);
         HttpResponse apiResponse = restAPIPublisher.addAPI(apiRequest);
-        //request to publish the API
         String apiIdNew = apiResponse.getData();
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiIdNew, restAPIPublisher);
+        //request to publish the API
         HttpResponse lifeCycleChangeResponse = restAPIPublisher
                 .changeAPILifeCycleStatus(apiIdNew, APILifeCycleAction.PUBLISH.getAction(), null);
 
@@ -580,6 +584,8 @@ public class WorkflowApprovalExecutorTest extends APIManagerLifecycleBaseTest {
         //create API and request for publish the API
         HttpResponse apiResponseNew = restAPIPublisher.addAPI(apiRequest);
         String apiIdSecond = apiResponseNew.getData();
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiIdSecond, restAPIPublisher);
         restAPIPublisher.changeAPILifeCycleStatus(apiIdSecond, APILifeCycleAction.PUBLISH.getAction(),
                 null);
         //get workflow requests of API state change
@@ -728,6 +734,8 @@ public class WorkflowApprovalExecutorTest extends APIManagerLifecycleBaseTest {
         apiRequest.setProvider(USER_SMITH);
         HttpResponse apiResponse = restAPIPublisher.addAPI(apiRequest);
         String apiIdFirst = apiResponse.getData();
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiIdFirst, restAPIPublisher);
         HttpResponse lifeCycleChangeResponse = restAPIPublisher
                 .changeAPILifeCycleStatus(apiIdFirst, APILifeCycleAction.PUBLISH.getAction(), null);
 

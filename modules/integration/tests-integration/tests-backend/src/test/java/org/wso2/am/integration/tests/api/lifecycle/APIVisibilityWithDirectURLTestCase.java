@@ -116,6 +116,10 @@ public class APIVisibilityWithDirectURLTestCase extends APIManagerLifecycleBaseT
         //add test api
         APIDTO apidto = restAPIPublisher.addAPI(apiRequest, "v3");
         apiID = apidto.getId();
+
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiID, restAPIPublisher);
+
         //publish the api
         restAPIPublisher.changeAPILifeCycleStatus(apidto.getId(), Constants.PUBLISHED);
         int retry = 0;

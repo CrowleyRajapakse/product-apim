@@ -163,6 +163,8 @@ public class APIScopeTestCase extends APIManagerLifecycleBaseTest {
 
 
         restAPIPublisher.updateSwagger(apiId, modifiedResource);
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
 
         waitForAPIDeployment();
 
@@ -287,6 +289,8 @@ public class APIScopeTestCase extends APIManagerLifecycleBaseTest {
         apiIdWithScope = apiDto.getId();
 
         restAPIPublisher.updateSwagger(apiIdWithScope, swagger);
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiIdWithScope, restAPIPublisher);
 
         //copy published api
         HttpResponse newVersionResponse = restAPIPublisher.copyAPI(API_VERSION_WITH_SCOPE_COPY, apiIdWithScope, null);
@@ -307,6 +311,8 @@ public class APIScopeTestCase extends APIManagerLifecycleBaseTest {
 
         HttpResponse updateResponse = restAPIPublisher.updateAPI(apiRequest, apiIdWithScope);
         assertEquals(updateResponse.getResponseCode(), HttpStatus.SC_OK, "Response Code Mismatch");
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiIdWithScope, restAPIPublisher);
     }
 
     @AfterClass(alwaysRun = true)

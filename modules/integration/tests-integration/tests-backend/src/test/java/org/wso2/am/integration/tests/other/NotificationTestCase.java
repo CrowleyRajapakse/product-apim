@@ -122,6 +122,9 @@ public class NotificationTestCase extends APIMIntegrationBaseTest {
         HttpResponse apiResponse = restAPIPublisher.addAPI(apiRequest);
         apiId = apiResponse.getData();
 
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
+
         //publishing API
         restAPIPublisher.changeAPILifeCycleStatus(apiId, APILifeCycleAction.PUBLISH.getAction(), null);
 
@@ -148,6 +151,10 @@ public class NotificationTestCase extends APIMIntegrationBaseTest {
         assertEquals(newVersionResponse.getResponseCode(), Response.Status.OK.getStatusCode(), "Response Code Mismatch");
 
         newApiId = newVersionResponse.getData();
+
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(newApiId, restAPIPublisher);
+        waitForAPIDeployment();
 
         //Publisher new version
         HttpResponse newVersionPublishResponse = restAPIPublisher

@@ -78,6 +78,9 @@ public class DefaultEndpointTestCase extends APIManagerLifecycleBaseTest {
         HttpResponse apiResponse = restAPIPublisher.addAPI(apiRequest);
         apiId = apiResponse.getData();
 
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
+
         restAPIPublisher.changeAPILifeCycleStatus(apiId, APILifeCycleAction.PUBLISH.getAction(), null);
 
         HttpResponse subscription = restAPIStore.createSubscription(apiId, applicationID, APIMIntegrationConstants.API_TIER.UNLIMITED);
@@ -130,6 +133,8 @@ public class DefaultEndpointTestCase extends APIManagerLifecycleBaseTest {
         apiRequest.setEndpoint((org.json.simple.JSONObject) parser.parse(endPointString));
 
         restAPIPublisher.updateAPI(apiRequest, apiId);
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
         waitForAPIDeployment();
 
         HttpClient client = HttpClientBuilder.create().build();

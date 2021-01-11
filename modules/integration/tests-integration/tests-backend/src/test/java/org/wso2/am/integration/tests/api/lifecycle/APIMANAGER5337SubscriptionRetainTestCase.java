@@ -73,6 +73,9 @@ public class APIMANAGER5337SubscriptionRetainTestCase extends APIManagerLifecycl
 
             String apiId = apiResponse.getData();
 
+            // Create Revision and Deploy to Gateway
+            createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
+
             //Publish the API
             restAPIPublisher.changeAPILifeCycleStatus(apiId, APILifeCycleAction.PUBLISH.getAction(), null);
 

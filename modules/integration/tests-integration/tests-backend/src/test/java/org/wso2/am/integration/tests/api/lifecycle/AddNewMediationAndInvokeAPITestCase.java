@@ -121,7 +121,8 @@ public class AddNewMediationAndInvokeAPITestCase extends APIManagerLifecycleBase
         mediationPolicyDTOList.add(mediationPolicyDTO);
         apidto.setMediationPolicies(mediationPolicyDTOList);
         restAPIPublisher.updateAPI(apidto);
-
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
         waitForAPIDeployment();
         HttpClient client = HttpClientBuilder.create().setHostnameVerifier(new AllowAllHostnameVerifier()).build();
         HttpGet request = new HttpGet(getAPIInvocationURLHttp(API_CONTEXT, API_VERSION_1_0_0));
@@ -144,7 +145,8 @@ public class AddNewMediationAndInvokeAPITestCase extends APIManagerLifecycleBase
         List<MediationPolicyDTO> mediationPolicyDTOList = new ArrayList<>();
         apidto.setMediationPolicies(mediationPolicyDTOList);
         restAPIPublisher.updateAPI(apidto);
-
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
         waitForAPIDeployment();
         //Send GET Request
         HttpClient client = HttpClientBuilder.create().setHostnameVerifier(new AllowAllHostnameVerifier()).build();

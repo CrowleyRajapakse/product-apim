@@ -105,6 +105,8 @@ public class APIResourceWithTemplateTestCase extends APIManagerLifecycleBaseTest
         HttpResponse createdApiResponse = restAPIPublisher.getAPI(apiId);
         assertEquals(Response.Status.OK.getStatusCode(), createdApiResponse.getResponseCode(),
                 API_NAME_DEFAULT + " API creation is failed");
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
 
         HttpResponse publishAPIResponse = publishAPI(apiCreationResponse.getId(), restAPIPublisher, false);
         assertEquals(publishAPIResponse.getResponseCode(), HTTP_RESPONSE_CODE_OK,
@@ -128,6 +130,9 @@ public class APIResourceWithTemplateTestCase extends APIManagerLifecycleBaseTest
         HttpResponse createdApiResponse = restAPIPublisher.getAPI(apiId);
         assertEquals(Response.Status.OK.getStatusCode(), createdApiResponse.getResponseCode(),
                 API_NAME_DEFAULT + " API creation is failed");
+
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
 
         // publish the api
         HttpResponse publishAPIResponse = publishAPI(apiId, restAPIPublisher,
@@ -165,6 +170,9 @@ public class APIResourceWithTemplateTestCase extends APIManagerLifecycleBaseTest
                 .addApplication(TEMPLATE_APP_NAME, APIMIntegrationConstants.APPLICATION_TIER.UNLIMITED, "",
                         "this-is-test");
         String appId = createApplication.getApplicationId();
+
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
 
         // publish api
         HttpResponse publishAPIResponse = publishAPI(apiId, restAPIPublisher, false);
@@ -213,6 +221,8 @@ public class APIResourceWithTemplateTestCase extends APIManagerLifecycleBaseTest
         Object jsonObject = parser.parse(endPointString);
         createAPIResponse.setEndpointConfig(jsonObject);
         restAPIPublisher.updateAPI(createAPIResponse);
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
         waitForAPIDeployment();
         //expected to hit backend "S2222-0496(15)27436-0" of decoded context "S2222-0496%2815%2927436-0"
         serviceResponse = HTTPSClientUtils.doGet(invokeURL, requestHeaders);

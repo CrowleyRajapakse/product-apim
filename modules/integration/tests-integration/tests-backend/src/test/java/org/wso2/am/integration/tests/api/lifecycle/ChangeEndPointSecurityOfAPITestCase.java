@@ -156,6 +156,13 @@ public class ChangeEndPointSecurityOfAPITestCase extends APIManagerLifecycleBase
             //Update API with Edited information
             restAPIPublisher.updateAPI(apidto);
 
+            // Undeploy and Delete existing API Revisions Since it has reached 5 max revision limit
+            undeployAndDeleteAPIRevisionsUsingRest(apiID, restAPIPublisher);
+            waitForAPIDeployment();
+
+            // Create Revision and Deploy to Gateway
+            createAPIRevisionAndDeployUsingRest(apiID, restAPIPublisher);
+
             //Send GET request
             waitForAPIDeployment();
 

@@ -84,6 +84,15 @@ public class APIDTO {
   @SerializedName("isDefaultVersion")
   private Boolean isDefaultVersion = null;
 
+  @SerializedName("isRevision")
+  private Boolean isRevision = null;
+
+  @SerializedName("revisionedApiId")
+  private String revisionedApiId = null;
+
+  @SerializedName("revisionId")
+  private Integer revisionId = null;
+
   @SerializedName("enableSchemaValidation")
   private Boolean enableSchemaValidation = null;
 
@@ -684,6 +693,51 @@ public class APIDTO {
 
   public void setIsDefaultVersion(Boolean isDefaultVersion) {
     this.isDefaultVersion = isDefaultVersion;
+  }
+
+  public APIDTO isRevision(Boolean isRevision) {
+    this.isRevision = isRevision;
+    return this;
+  }
+
+   /**
+   * Get isRevision
+   * @return isRevision
+  **/
+  @ApiModelProperty(example = "false", value = "")
+  public Boolean isIsRevision() {
+    return isRevision;
+  }
+
+  public void setIsRevision(Boolean isRevision) {
+    this.isRevision = isRevision;
+  }
+
+   /**
+   * UUID of the api registry artifact 
+   * @return revisionedApiId
+  **/
+  @ApiModelProperty(example = "01234567-0123-0123-0123-012345678901", value = "UUID of the api registry artifact ")
+  public String getRevisionedApiId() {
+    return revisionedApiId;
+  }
+
+  public APIDTO revisionId(Integer revisionId) {
+    this.revisionId = revisionId;
+    return this;
+  }
+
+   /**
+   * Get revisionId
+   * @return revisionId
+  **/
+  @ApiModelProperty(example = "1", value = "")
+  public Integer getRevisionId() {
+    return revisionId;
+  }
+
+  public void setRevisionId(Integer revisionId) {
+    this.revisionId = revisionId;
   }
 
   public APIDTO enableSchemaValidation(Boolean enableSchemaValidation) {
@@ -1460,6 +1514,9 @@ public class APIDTO {
         Objects.equals(this.destinationStatsEnabled, API.destinationStatsEnabled) &&
         Objects.equals(this.hasThumbnail, API.hasThumbnail) &&
         Objects.equals(this.isDefaultVersion, API.isDefaultVersion) &&
+        Objects.equals(this.isRevision, API.isRevision) &&
+        Objects.equals(this.revisionedApiId, API.revisionedApiId) &&
+        Objects.equals(this.revisionId, API.revisionId) &&
         Objects.equals(this.enableSchemaValidation, API.enableSchemaValidation) &&
         Objects.equals(this.enableStore, API.enableStore) &&
         Objects.equals(this.type, API.type) &&
@@ -1499,7 +1556,7 @@ public class APIDTO {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, description, context, version, provider, lifeCycleStatus, wsdlInfo, wsdlUrl, responseCachingEnabled, cacheTimeout, destinationStatsEnabled, hasThumbnail, isDefaultVersion, enableSchemaValidation, enableStore, type, transport, tags, policies, apiThrottlingPolicy, authorizationHeader, securityScheme, maxTps, visibility, visibleRoles, visibleTenants, endpointSecurity, gatewayEnvironments, labels, mediationPolicies, subscriptionAvailability, subscriptionAvailableTenants, additionalProperties, monetization, accessControl, accessControlRoles, businessInformation, corsConfiguration, workflowStatus, createdTime, lastUpdatedTime, endpointConfig, endpointImplementationType, scopes, operations, threatProtectionPolicies, categories, keyManagers);
+    return Objects.hash(id, name, description, context, version, provider, lifeCycleStatus, wsdlInfo, wsdlUrl, responseCachingEnabled, cacheTimeout, destinationStatsEnabled, hasThumbnail, isDefaultVersion, isRevision, revisionedApiId, revisionId, enableSchemaValidation, enableStore, type, transport, tags, policies, apiThrottlingPolicy, authorizationHeader, securityScheme, maxTps, visibility, visibleRoles, visibleTenants, endpointSecurity, gatewayEnvironments, labels, mediationPolicies, subscriptionAvailability, subscriptionAvailableTenants, additionalProperties, monetization, accessControl, accessControlRoles, businessInformation, corsConfiguration, workflowStatus, createdTime, lastUpdatedTime, endpointConfig, endpointImplementationType, scopes, operations, threatProtectionPolicies, categories, keyManagers);
   }
 
 
@@ -1522,6 +1579,9 @@ public class APIDTO {
     sb.append("    destinationStatsEnabled: ").append(toIndentedString(destinationStatsEnabled)).append("\n");
     sb.append("    hasThumbnail: ").append(toIndentedString(hasThumbnail)).append("\n");
     sb.append("    isDefaultVersion: ").append(toIndentedString(isDefaultVersion)).append("\n");
+    sb.append("    isRevision: ").append(toIndentedString(isRevision)).append("\n");
+    sb.append("    revisionedApiId: ").append(toIndentedString(revisionedApiId)).append("\n");
+    sb.append("    revisionId: ").append(toIndentedString(revisionId)).append("\n");
     sb.append("    enableSchemaValidation: ").append(toIndentedString(enableSchemaValidation)).append("\n");
     sb.append("    enableStore: ").append(toIndentedString(enableStore)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");

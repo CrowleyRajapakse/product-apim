@@ -110,6 +110,8 @@ public class APIAccessibilityOfPublishedOldAPIAndPublishedCopyAPITestCase
                      "Copy  API response data is invalid" + getAPIIdentifierStringFromAPIRequest(apiRequest));
 
         newApiId = newVersionResponse.getData();
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(newApiId, restAPIPublisher);
     }
 
 

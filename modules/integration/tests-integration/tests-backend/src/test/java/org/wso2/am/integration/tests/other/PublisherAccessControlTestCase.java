@@ -324,6 +324,8 @@ public class PublisherAccessControlTestCase extends APIManagerLifecycleBaseTest 
         createAPIRequest.setVisibility(RESTRICTED_ACCESS_CONTROL);
         createAPIRequest.setRoles(SUBSCRIBER_ROLE);
         restAPIPublisher.updateAPI(createAPIRequest, restrictedAccessRestrictedVisibilityAPIId);
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(restrictedAccessRestrictedVisibilityAPIId, restAPIPublisher);
         // Waiting to index after api update operation
         Thread.sleep(10000);
 

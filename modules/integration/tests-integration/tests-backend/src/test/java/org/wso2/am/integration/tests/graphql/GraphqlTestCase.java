@@ -134,7 +134,8 @@ public class GraphqlTestCase extends APIMIntegrationBaseTest {
         HttpResponse createdApiResponse = restAPIPublisher.getAPI(graphqlAPIId);
         assertEquals(Response.Status.OK.getStatusCode(), createdApiResponse.getResponseCode(),
                 GRAPHQL_API_NAME + " API creation is failed");
-
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(graphqlAPIId, restAPIPublisher);
         // publish api
         restAPIPublisher.changeAPILifeCycleStatus(graphqlAPIId, Constants.PUBLISHED);
         waitForAPIDeploymentSync(user.getUserName(), GRAPHQL_API_NAME, API_VERSION_1_0_0,
@@ -158,6 +159,8 @@ public class GraphqlTestCase extends APIMIntegrationBaseTest {
         restAPIPublisher.updateGraphqlSchemaDefinition(graphqlAPIId, updatedSchemaDefinition);
         GraphQLSchemaDTO schema = restAPIPublisher.getGraphqlSchemaDefinition(graphqlAPIId);
         Assert.assertEquals(schema.getSchemaDefinition(), updatedSchemaDefinition);
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(graphqlAPIId, restAPIPublisher);
     }
 
 
@@ -232,6 +235,8 @@ public class GraphqlTestCase extends APIMIntegrationBaseTest {
         APIDTO apidto = g.fromJson(createdApiResponse.getData(), APIDTO.class);
         apidto.setScopes(apiScopeList);
         APIDTO updatedAPI = restAPIPublisher.updateAPI(apidto, graphqlAPIId);
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(graphqlAPIId, restAPIPublisher);
 
         ArrayList scope = new ArrayList();
         scope.add("subscriber");
@@ -246,6 +251,8 @@ public class GraphqlTestCase extends APIMIntegrationBaseTest {
 
         apidto.operations(operations);
         restAPIPublisher.updateAPI(apidto, graphqlAPIId);
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(graphqlAPIId, restAPIPublisher);
 
         createGraphqlAppAndSubscribeToAPI("CountriesOauthAPPForOAuthScopeCheck","OAUTH");
         // Keep sufficient time to update map
@@ -319,6 +326,9 @@ public class GraphqlTestCase extends APIMIntegrationBaseTest {
 
         apidto.operations(operations);
         restAPIPublisher.updateAPI(apidto, graphqlAPIId);
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(graphqlAPIId, restAPIPublisher);
+        waitForAPIDeployment();
         createGraphqlAppAndSubscribeToAPI(  "CountriesOauthAPPForSecurityCheck","OAUTH");
         // Keep sufficient time to update map
         Thread.sleep(10000);

@@ -326,6 +326,8 @@ public class APIImportExportTestCase extends APIManagerLifecycleBaseTest {
         //Update imported API information
         apiObj.setDescription(UPDATED_DESCRIPTION);
         restAPIPublisher.updateAPI(apiObj);
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
     }
 
     @Test(groups = {
@@ -489,6 +491,10 @@ public class APIImportExportTestCase extends APIManagerLifecycleBaseTest {
         //get the imported API information
         APIDTO apiObj = getAPI(NEW_API_NAME, API_VERSION, user.getUserName());
         newApiId = apiObj.getId();
+
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(newApiId, restAPIPublisher);
+        waitForAPIDeployment();
 
         String state = apiObj.getLifeCycleStatus();
         assertEquals(state, APILifeCycleState.PUBLISHED.getState().toUpperCase(),

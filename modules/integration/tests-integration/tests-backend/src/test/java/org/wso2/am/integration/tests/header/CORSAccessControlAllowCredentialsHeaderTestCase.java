@@ -148,6 +148,10 @@ public class CORSAccessControlAllowCredentialsHeaderTestCase extends APIManagerL
         HttpResponse apiResponse = restAPIPublisher.addAPI(apiRequest);
         apiId = apiResponse.getData();
 
+        // Create Revision and Deploy to Gateway
+        createAPIRevisionAndDeployUsingRest(apiId, restAPIPublisher);
+        waitForAPIDeployment();
+
         restAPIPublisher.changeAPILifeCycleStatus(apiId, APILifeCycleAction.PUBLISH.getAction(), null);
 
         //Create application
